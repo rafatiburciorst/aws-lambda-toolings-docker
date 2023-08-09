@@ -3,7 +3,8 @@ const s3Config = {
     s3ForcePathStyle: true
 }
 const isLocal = process.env.IS_OFFLINE
-
+// const isLocal = true
+// console.info('isLocal', process.env.IS_OFFLINE);
 
 if(isLocal) {
     AWS.config.update({
@@ -12,7 +13,7 @@ if(isLocal) {
             secretAccessKey: 'test'
         }
     })
-    const host = 'localhost'
+    const host = process.env.LOCALSTACK_HOST || 'localhost'
     s3Config.endpoint = new AWS.Endpoint(
         `http://${host}:4566`
     )
